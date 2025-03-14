@@ -20,7 +20,7 @@ final class FrontController extends AbstractController
         ]);
     }
 
-    #[Route('/thread/{id}', name: 'thread')]
+    #[Route('/thread/{id}', name: 'thread_show')]
     public function thread(ThreadRepository $threadRepo, int $id): Response
     {
         $thread = $threadRepo->find($id);
