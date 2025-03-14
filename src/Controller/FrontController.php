@@ -19,4 +19,15 @@ final class FrontController extends AbstractController
             'threads' => $threads,
         ]);
     }
+
+    #[Route('/thread/{id}', name: 'thread')]
+    public function thread(ThreadRepository $threadRepo, int $id): Response
+    {
+        $thread = $threadRepo->find($id);
+
+        return $this->render('front/thread.html.twig', [
+            'controller_name' => 'FrontController',
+            'thread' => $thread,
+        ]);
+    }
 }

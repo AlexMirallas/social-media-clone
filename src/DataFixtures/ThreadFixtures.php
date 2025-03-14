@@ -24,6 +24,8 @@ class ThreadFixtures extends Fixture implements DependentFixtureInterface
             $thread->setDtCreation($faker->dateTimeBetween('-1 year', 'now'));
             $thread->setSubreddit($this->getReference("subreddit_" . rand(0, 9), Subreddit::class));
             $thread->setOriginalPoster($this->getReference("user_" . rand(0, 49), User::class));
+            $thread->setUpvotes(rand(0, 2000));
+            $thread->setDownvotes(rand(0, 2000));
             $manager->persist($thread);
             $this->addReference("thread_$i", $thread);
         }

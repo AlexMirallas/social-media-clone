@@ -39,6 +39,12 @@ class Comment
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent')]
     private Collection $comments;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $upvote = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $downvote = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -135,6 +141,30 @@ class Comment
                 $comment->setParent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpvote(): ?int
+    {
+        return $this->upvote;
+    }
+
+    public function setUpvote(?int $upvote): static
+    {
+        $this->upvote = $upvote;
+
+        return $this;
+    }
+
+    public function getDownvote(): ?int
+    {
+        return $this->downvote;
+    }
+
+    public function setDownvote(?int $downvote): static
+    {
+        $this->downvote = $downvote;
 
         return $this;
     }

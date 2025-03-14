@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+    <div class="row my-3">     
+        <div class="card col-lg-4 col-md-6 col-sm-12">
+            <div class="card-header">
+                <a href="">j/{{thread.subreddit.title}}</a> • <a href="">{{thread.getOriginalPoster().username}}</a> • <a href="">{{thread.getDtCreation|date('Y-m-d H:i:s')}}</a>
+            </div>
+            <div class="card-body position-relative ">
+               <h5 class="card-title">{{thread.title}}</h5>
+               <p class="card-text">{{thread.body}}</p>
+            </div>
+            <div class="card-footer">
+                <span class="me-3 d-inline-flex align-items-center gap-2 border rounded-pill p-2 px-2 ">{{ ux_icon('bi:chat' , {height:"1.4rem", width:"1.4rem"})  }} {{thread.getComments | length}}</span>
+                <span class="me-3 d-inline-flex align-items-center gap-2 border rounded-pill p-2 px-2 ">{{ ux_icon('tabler:arrow-big-up', {height:"1.4rem", width:"1.4rem" }) }} {{(thread.getUpvotes - thread.getDownvotes) }} {{ ux_icon('tabler:arrow-big-down', {height:"1.4rem", width:"1.4rem" }) }}</span>
+                <span > <a class=" d-inline-flex align-items-center gap-2 border rounded-pill p-2 px-2 " href="">{{ ux_icon('tabler:share-3', {height:"1.4rem", width:"1.4rem"}) }}Share</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="comments-section">
+    {% for comment in thread.comments %}
+        <div class="comment">
+            <div class="comment-header">
+                <span class="comment-user">{{ comment.user.username }}</span>
+                <span class="comment-date">{{ comment.getDtCreation|date('Y-m-d H:i') }}</span>
+            </div>
+            <div class="comment-body">
+                {{ comment.getCommentBody }}
+            </div>
+            <div class="comment-footer">
+                <span class="comment-upvotes">Upvotes: {{ comment.upvote }}</span>
+                <span class="comment-downvotes">Downvotes: {{ comment.downvote }}</span>
+                <button class="reply-button" data-comment-id="{{ comment.id }}">Reply</button>
+            </div>
+            {% if comment.comments is not empty %}
+                <div class="replies">
+                    {% include 'components/comments.html.twig' with { 'comments': comment.comments } %}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+

@@ -40,6 +40,12 @@ class Thread
     #[ORM\Column(type: Types::TEXT)]
     private ?string $body = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $upvotes = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $downvotes = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -148,6 +154,30 @@ class Thread
     public function setBody(string $body): static
     {
         $this->body = $body;
+
+        return $this;
+    }
+
+    public function getUpvotes(): ?int
+    {
+        return $this->upvotes;
+    }
+
+    public function setUpvotes(?int $upvotes): static
+    {
+        $this->upvotes = $upvotes;
+
+        return $this;
+    }
+
+    public function getDownvotes(): ?int
+    {
+        return $this->downvotes;
+    }
+
+    public function setDownvotes(?int $downvotes): static
+    {
+        $this->downvotes = $downvotes;
 
         return $this;
     }

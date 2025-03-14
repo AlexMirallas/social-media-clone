@@ -3,33 +3,13 @@
 {% block title %}Welcome to jellu{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2">
-                {% include "components/_left_sidebar.html.twig" %}  <!-- Include the left sidebar -->
-            </div>
-            <div class="col-md-8">
-                <div class="container">
-                    <h2>Main Feed</h2>
-                    {% for thread in threads %}
-                        <div class="row">     
-                             <div class="card">
-                                <div class="card-header">
-                                   sub/ user
-                                 </div>
-                                 <div class="card-body">
-                                   <h5 class="card-title">{{thread.title}}</h5>
-                                   <p class="card-text">{{thread.body}}</p>
-                                 </div>
-                                 <div class="card-footer">
-                                    <span>Comments</span> <span>Upvotes/Downvotes</span> <span>Share</span>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>  
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-    </div>
+    <section>
+        {% include "components/_left_sidebar.html.twig" %}
+    </section>
+    <section class="flex-1 flex flex-col justify-center items-center lg:ml-64">
+        {% include "components/_card.html.twig" %}
+    </section>
+    <section class="w-64 hidden xl:block">
+        Right Sidebar
+    </section>
 {% endblock %}

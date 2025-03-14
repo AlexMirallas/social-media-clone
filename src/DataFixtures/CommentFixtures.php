@@ -23,7 +23,9 @@ class CommentFixtures extends Fixture implements DependentFixtureInterface
             $comment->setCommentBody($faker->paragraph())
                     ->setUser($this->getReference('user_' . rand(0, 49), User::class))
                     ->setThread($this->getReference('thread_' . rand(0, 99), Thread::class))
-                    ->setDtCreation($faker->dateTimeBetween('-1 year', 'now'));
+                    ->setDtCreation($faker->dateTimeBetween('-1 year', 'now'))
+                    ->setUpvote(rand(0, 1500))
+                    ->setDownvote(rand(0, 1500));
             $manager->persist($comment);
         }
 
